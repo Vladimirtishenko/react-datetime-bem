@@ -1,31 +1,34 @@
-var webpack = require('webpack');
+"use strict";
 
-var plugins = [
-  new webpack.DefinePlugin({
-  	'process.env': { NODE_ENV: '"production"'}
-  })
-];
+const webpack = require('webpack');
+const fs = require('fs');
+const path = require('path');
+const babelSettings = JSON.parse(fs.readFileSync(".babelrc"));
+const environment = process.env.NODE_ENV || 'development';
 
-module.exports = {
-
-  entry: ['./DateTime.js'],
-
-  output: {
-    path: __dirname + '/dist/',
-    library: 'Datetime',
-    libraryTarget: 'umd'
-  },
-
-  resolve: {
-    extensions: ['', '.js']
-  },
-
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'moment': 'moment',
-    'moment-timezone': 'moment-timezone'
-  },
-
-  plugins: plugins
+const config = {
+    name: 'js',
+    entry: {
+        app: './examples/app.js'
+    },
+    output: {
+        path: path.join(__dirname, 'dest'),
+        filename: 'build.[name].js'
+    },
+    module: {
+        rules: [
+            {
+                use: 'babel-loader',
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/
+            }
+        ]
+    },
+    performance: {
+      hints: false
+    },
+    mode: environment,
 };
+
+
+module.exports = config;

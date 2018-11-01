@@ -1,24 +1,39 @@
 'use strict';
 
-var React = require('react'),
-	createClass = require('create-react-class')
-;
+import React from 'react';
 
-var DateTimePickerYears = createClass({
-	render: function() {
+class DateTimePickerYears extends React.Component {
+	render(){
 		var year = parseInt( this.props.viewDate.year() / 10, 10 ) * 10;
 
-		return React.createElement('div', { className: 'rdtYears' }, [
-			React.createElement('table', { key: 'a' }, React.createElement('thead', {}, React.createElement('tr', {}, [
-				React.createElement('th', { key: 'prev', className: 'rdtPrev', onClick: this.props.subtractTime( 10, 'years' )}, React.createElement('span', {}, '‹' )),
-				React.createElement('th', { key: 'year', className: 'rdtSwitch', onClick: this.props.showView( 'years' ), colSpan: 2 }, year + '-' + ( year + 9 ) ),
-				React.createElement('th', { key: 'next', className: 'rdtNext', onClick: this.props.addTime( 10, 'years' )}, React.createElement('span', {}, '›' ))
-			]))),
-			React.createElement('table', { key: 'years' }, React.createElement('tbody',  {}, this.renderYears( year )))
-		]);
-	},
+		return (
+			<div className="date-picker__years">
+				<table>
+					<thead>
+						<tr>
+							<th onClick={this.props.subtractTime( 10, 'years' )} className='date-picker__prev'>
+								<span>‹</span>
+							</th>
+							<th onClick={this.props.showView( 'years' )} colSpan="2" className='date-picker__switch'>
+								{year + '-' + ( year + 9 )}
+							</th>
+							<th onClick={this.props.addTime( 10, 'years' )} className='date-picker__next'>
+								<span>›</span>
+							</th>
+						</tr>
+					</thead>
+				</table>
+				<table>
+					<tbody>
+						{this.renderYears( year )}
+					</tbody>
+				</table>
+			</div>
+		)
 
-	renderYears: function( year ) {
+	}
+
+	renderYears( year ) {
 		var years = [],
 			i = -1,
 			rows = [],
@@ -34,13 +49,13 @@ var DateTimePickerYears = createClass({
 
 		year--;
 		while (i < 11) {
-			classes = 'rdtYear';
+			classes = 'date-picker__year';
 			currentYear = this.props.viewDate.clone().set(
 				{ year: year, month: irrelevantMonth, date: irrelevantDate } );
 
-			// Not sure what 'rdtOld' is for, commenting out for now as it's not working properly
+			// Not sure what 'date-picker__last' is for, commenting out for now as it's not working properly
 			// if ( i === -1 | i === 10 )
-				// classes += ' rdtOld';
+				// classes += ' date-picker__last';
 
 			noOfDaysInYear = currentYear.endOf( 'year' ).format( 'DDD' );
 			daysInYear = Array.from({ length: noOfDaysInYear }, function( e, i ) {
@@ -55,10 +70,10 @@ var DateTimePickerYears = createClass({
 			isDisabled = ( validDay === undefined );
 
 			if ( isDisabled )
-				classes += ' rdtDisabled';
+				classes += ' date-picker--disabled';
 
 			if ( selectedDate && selectedDate.year() === year )
-				classes += ' rdtActive';
+				classes += ' date-picker--active';
 
 			props = {
 				key: year,
@@ -73,7 +88,7 @@ var DateTimePickerYears = createClass({
 			years.push( renderer( props, year, selectedDate && selectedDate.clone() ));
 
 			if ( years.length === 4 ) {
-				rows.push( React.createElement('tr', { key: i }, years ) );
+				rows.push( <tr key={i}>{years}</tr> );
 				years = [];
 			}
 
@@ -82,19 +97,19 @@ var DateTimePickerYears = createClass({
 		}
 
 		return rows;
-	},
+	}
 
-	updateSelectedYear: function( event ) {
+	updateSelectedYear( event ) {
 		this.props.updateSelectedDate( event );
-	},
+	}
 
-	renderYear: function( props, year ) {
-		return React.createElement('td',  props, year );
-	},
+	renderYear( props, year ) {
+		return <td {...props}>{year}</td>;
+	}
 
-	alwaysValidDate: function() {
+	alwaysValidDate() {
 		return 1;
-	},
-});
+	}
+}
 
-module.exports = DateTimePickerYears;
+export default DateTimePickerYears;

@@ -1,11 +1,4 @@
-/*!
- * https://github.com/YouCanBookMe/react-datetime
- */
-
-.rdt {
-  position: relative;
-}
-.rdtPicker {
+.date-picker {
   display: none;
   position: absolute;
   width: 250px;
@@ -16,46 +9,51 @@
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
   border: 1px solid #f9f9f9;
 }
-.rdtOpen .rdtPicker {
+
+.date-wrapper {
+    position: relative;
+}
+
+.date-wrapper .date-picker {
   display: block;
 }
-.rdtStatic .rdtPicker {
+.date-static .date-picker {
   box-shadow: none;
   position: static;
 }
 
-.rdtPicker .rdtTimeToggle {
+.date-picker .date-picker__time-toggle {
   text-align: center;
 }
 
-.rdtPicker table {
+.date-picker table {
   width: 100%;
   margin: 0;
 }
-.rdtPicker td,
-.rdtPicker th {
+.date-picker td,
+.date-picker th {
   text-align: center;
   height: 28px;
 }
-.rdtPicker td {
+.date-picker td {
   cursor: pointer;
 }
-.rdtPicker td.rdtDay:hover,
-.rdtPicker td.rdtHour:hover,
-.rdtPicker td.rdtMinute:hover,
-.rdtPicker td.rdtSecond:hover,
-.rdtPicker .rdtTimeToggle:hover {
+.date-picker td.date-picker__today:hover,
+.date-picker td.date-picker__hour:hover,
+.date-picker td.date-picker__minute:hover,
+.date-picker td.date-picker__second:hover,
+.date-picker .date-picker__time-toggle:hover {
   background: #eeeeee;
   cursor: pointer;
 }
-.rdtPicker td.rdtOld,
-.rdtPicker td.rdtNew {
+.date-picker td.date-picker__last,
+.date-picker td.date-picker__next {
   color: #999999;
 }
-.rdtPicker td.rdtToday {
+.date-picker td.date-picker__today {
   position: relative;
 }
-.rdtPicker td.rdtToday:before {
+.date-picker td.date-picker__today:before {
   content: '';
   display: inline-block;
   border-left: 7px solid transparent;
@@ -65,44 +63,44 @@
   bottom: 4px;
   right: 4px;
 }
-.rdtPicker td.rdtActive,
-.rdtPicker td.rdtActive:hover {
+.date-picker td.date-picker--active,
+.date-picker td.date-picker--active:hover {
   background-color: #428bca;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.rdtPicker td.rdtActive.rdtToday:before {
+.date-picker td.date-picker--active.date-picker__today:before {
   border-bottom-color: #fff;
 }
-.rdtPicker td.rdtDisabled,
-.rdtPicker td.rdtDisabled:hover {
+.date-picker td.date-picker--disabled,
+.date-picker td.date-picker--disabled:hover {
   background: none;
   color: #999999;
   cursor: not-allowed;
 }
 
-.rdtPicker td span.rdtOld {
+.date-picker td span.date-picker__last {
   color: #999999;
 }
-.rdtPicker td span.rdtDisabled,
-.rdtPicker td span.rdtDisabled:hover {
+.date-picker td span.date-picker--disabled,
+.date-picker td span.date-picker--disabled:hover {
   background: none;
   color: #999999;
   cursor: not-allowed;
 }
-.rdtPicker th {
+.date-picker th {
   border-bottom: 1px solid #f9f9f9;
 }
-.rdtPicker .dow {
+.date-picker .date-picker__days {
   width: 14.2857%;
   border-bottom: none;
   cursor: default;
 }
-.rdtPicker th.rdtSwitch {
+.date-picker th.rdtSwitch {
   width: 100px;
 }
-.rdtPicker th.rdtNext,
-.rdtPicker th.rdtPrev {
+.date-picker th.rdtNext,
+.date-picker th.rdtPrev {
   font-size: 21px;
   vertical-align: top;
 }
@@ -118,69 +116,69 @@
   user-select: none;
 }
 
-.rdtPicker th.rdtDisabled,
-.rdtPicker th.rdtDisabled:hover {
+.date-picker th.date-picker--disabled,
+.date-picker th.date-picker--disabled:hover {
   background: none;
   color: #999999;
   cursor: not-allowed;
 }
-.rdtPicker thead tr:first-child th {
+.date-picker thead tr:first-child th {
   cursor: pointer;
 }
-.rdtPicker thead tr:first-child th:hover {
+.date-picker thead tr:first-child th:hover {
   background: #eeeeee;
 }
 
-.rdtPicker tfoot {
+.date-picker tfoot {
   border-top: 1px solid #f9f9f9;
 }
 
-.rdtPicker button {
+.date-picker button {
   border: none;
   background: none;
   cursor: pointer;
 }
-.rdtPicker button:hover {
+.date-picker button:hover {
   background-color: #eee;
 }
 
-.rdtPicker thead button {
+.date-picker thead button {
   width: 100%;
   height: 100%;
 }
 
-td.rdtMonth,
+td.date-picker__month,
 td.rdtYear {
   height: 50px;
   width: 25%;
   cursor: pointer;
 }
-td.rdtMonth:hover,
+td.date-picker__month:hover,
 td.rdtYear:hover {
   background: #eee;
 }
 
-.rdtCounters {
+.date-picker__counters {
   display: inline-block;
 }
 
-.rdtCounters > div {
+.date-picker__counters > div {
   float: left;
 }
 
-.rdtCounter {
+.date-picker__counter {
   height: 100px;
 }
 
-.rdtCounter {
+.date-picker__counter {
   width: 40px;
 }
 
-.rdtCounterSeparator {
+.date-picker__counter-separator {
   line-height: 100px;
 }
 
-.rdtCounter .rdtBtn {
+.date-picker__counter .date-picker__button {
   height: 40%;
   line-height: 40px;
   cursor: pointer;
@@ -193,26 +191,26 @@ td.rdtYear:hover {
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;
 }
-.rdtCounter .rdtBtn:hover {
+.date-picker__counter .date-picker__button:hover {
   background: #eee;
 }
-.rdtCounter .rdtCount {
+.date-picker__counter .date-picker__count {
   height: 20%;
   font-size: 1.2em;
 }
 
-.rdtMilli {
+.date-picker__counter--milliseconds {
   vertical-align: middle;
   padding-left: 8px;
   width: 48px;
 }
 
-.rdtMilli input {
+.date-picker__counter--milliseconds input {
   width: 100%;
   font-size: 1.2em;
   margin-top: 37px;
 }
 
-.rdtTime td {
+.date-picker__time td {
   cursor: default;
 }

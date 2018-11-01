@@ -16,11 +16,11 @@ var DateTimePickerDays = createClass({
 		tableChildren = [
 			React.createElement('thead', { key: 'th' }, [
 				React.createElement('tr', { key: 'h' }, [
-					React.createElement('th', { key: 'p', className: 'rdtPrev', onClick: this.props.subtractTime( 1, 'months' )}, React.createElement('span', {}, '‹' )),
-					React.createElement('th', { key: 's', className: 'rdtSwitch', onClick: this.props.showView( 'months' ), colSpan: 5, 'data-value': this.props.viewDate.month() }, locale.months( date ) + ' ' + date.year() ),
-					React.createElement('th', { key: 'n', className: 'rdtNext', onClick: this.props.addTime( 1, 'months' )}, React.createElement('span', {}, '›' ))
+					React.createElement('th', { key: 'p', className: 'date-picker__prev', onClick: this.props.subtractTime( 1, 'months' )}, React.createElement('span', {}, '‹' )),
+					React.createElement('th', { key: 's', className: 'date-picker__switch', onClick: this.props.showView( 'months' ), colSpan: 5, 'data-value': this.props.viewDate.month() }, locale.months( date ) + ' ' + date.year() ),
+					React.createElement('th', { key: 'n', className: 'date-picker__next', onClick: this.props.addTime( 1, 'months' )}, React.createElement('span', {}, '›' ))
 				]),
-				React.createElement('tr', { key: 'd'}, this.getDaysOfWeek( locale ).map( function( day, index ) { return React.createElement('th', { key: day + index, className: 'dow'}, day ); }) )
+				React.createElement('tr', { key: 'd'}, this.getDaysOfWeek( locale ).map( function( day, index ) { return React.createElement('th', { key: day + index, className: 'date-picker__days'}, day ); }) )
 			]),
 			React.createElement('tbody', { key: 'tb' }, this.renderDays())
 		];
@@ -28,7 +28,7 @@ var DateTimePickerDays = createClass({
 		if ( footer )
 			tableChildren.push( footer );
 
-		return React.createElement('div', { className: 'rdtDays' },
+		return React.createElement('div', { className: 'date-picker__days-wrapper' },
 			React.createElement('table', {}, tableChildren )
 		);
 	},
@@ -70,23 +70,23 @@ var DateTimePickerDays = createClass({
 		var lastDay = prevMonth.clone().add( 42, 'd' );
 
 		while ( prevMonth.isBefore( lastDay ) ) {
-			classes = 'rdtDay';
+			classes = 'date-picker__day';
 			currentDate = prevMonth.clone();
 
 			if ( ( prevMonth.year() === currentYear && prevMonth.month() < currentMonth ) || ( prevMonth.year() < currentYear ) )
-				classes += ' rdtOld';
+				classes += ' date-picker__last';
 			else if ( ( prevMonth.year() === currentYear && prevMonth.month() > currentMonth ) || ( prevMonth.year() > currentYear ) )
-				classes += ' rdtNew';
+				classes += ' date-picker__next';
 
 			if ( selected && prevMonth.isSame( selected, 'day' ) )
-				classes += ' rdtActive';
+				classes += ' date-picker--active';
 
 			if ( prevMonth.isSame( moment(), 'day' ) )
-				classes += ' rdtToday';
+				classes += ' date-picker__today';
 
 			isDisabled = !isValid( currentDate, selected );
 			if ( isDisabled )
-				classes += ' rdtDisabled';
+				classes += ' date-picker--disabled';
 
 			dayProps = {
 				key: prevMonth.format( 'M_D' ),
@@ -126,7 +126,7 @@ var DateTimePickerDays = createClass({
 
 		return React.createElement('tfoot', { key: 'tf'},
 			React.createElement('tr', {},
-				React.createElement('td', { onClick: this.props.showView( 'time' ), colSpan: 7, className: 'rdtTimeToggle' }, date.format( this.props.timeFormat ))
+				React.createElement('td', { onClick: this.props.showView( 'time' ), colSpan: 7, className: 'date-picker__time-toggle' }, date.format( this.props.timeFormat ))
 			)
 		);
 	},

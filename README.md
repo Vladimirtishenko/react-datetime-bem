@@ -1,7 +1,4 @@
-# react-datetime
-
-[![Build Status](https://secure.travis-ci.org/YouCanBookMe/react-datetime.svg)](https://travis-ci.org/YouCanBookMe/react-datetime)
-[![npm version](https://badge.fury.io/js/react-datetime.svg)](http://badge.fury.io/js/react-datetime)
+# react-datepicker-bem
 
 A date and time picker in the same React.js component. It can be used as a datepicker, timepicker or both at the same time. It is **highly customizable** and it even allows to edit date's milliseconds.
 
@@ -11,21 +8,21 @@ This project started as a fork of https://github.com/quri/react-bootstrap-dateti
 
 Install using npm:
 ```sh
-npm install --save react-datetime
+npm install --save react-datepicker-bem
 ```
 
 Install using yarn:
 ```sh
-yarn add react-datetime
+yarn add react-datepicker-bem
 ```
 
 ## Usage
 
-[React.js](http://facebook.github.io/react/) and [Moment.js](http://momentjs.com/) are peer dependencies for react-datetime (as well as [Moment.js timezones](https://momentjs.com/timezone/) if you want to use the `displayTimeZone` prop). These dependencies are not installed along with react-datetime automatically, but your project needs to have them installed in order to make the datepicker work. You can then use the datepicker like in the example below.
+[React.js](http://facebook.github.io/react/) and [Moment.js](http://momentjs.com/) are peer dependencies for react-datepicker-bem (as well as [Moment.js timezones](https://momentjs.com/timezone/) if you want to use the `displayTimeZone` prop). These dependencies are not installed along with react-datepicker-bem automatically, but your project needs to have them installed in order to make the datepicker work. You can then use the datepicker like in the example below.
 
 
 ```js
-require('react-datetime');
+require('react-datepicker-bem');
 
 ...
 
@@ -33,9 +30,8 @@ render: function() {
     return <Datetime />;
 }
 ```
-[See this example working](http://codepen.io/simeg/pen/mEmQmP).
 
-**Don't forget to add the [CSS stylesheet](https://github.com/YouCanBookMe/react-datetime/blob/master/css/react-datetime.css) to make it work out of the box.**
+**Don't forget to add the [CSS stylesheet]
 
 ## API
 
@@ -47,8 +43,8 @@ render: function() {
 | **dateFormat**   | `boolean` or `string`  | `true` | Defines the format for the date. It accepts any [Moment.js date format](http://momentjs.com/docs/#/displaying/format/) (not in localized format). If `true` the date will be displayed using the defaults for the current locale. If `false` the datepicker is disabled and the component can be used as timepicker, see [available units docs](#specify-available-units). |
 | **timeFormat**   | `boolean` or `string`  | `true` | Defines the format for the time. It accepts any [Moment.js time format](http://momentjs.com/docs/#/displaying/format/) (not in localized format). If `true` the time will be displayed using the defaults for the current locale. If `false` the timepicker is disabled and the component can be used as datepicker, see [available units docs](#specify-available-units). |
 | **input** | `boolean` | `true` | Whether to show an input field to edit the date manually. |
-| **open** | `boolean` | `null` | Whether to open or close the picker. If not set react-datetime will open the datepicker on input focus and close it on click outside. |
-| **locale** | `string` | `null` | Manually set the locale for the react-datetime instance. Moment.js locale needs to be loaded to be used, see [i18n docs](#i18n).
+| **open** | `boolean` | `null` | Whether to open or close the picker. If not set react-datepicker-bem will open the datepicker on input focus and close it on click outside. |
+| **locale** | `string` | `null` | Manually set the locale for the react-datepicker-bem instance. Moment.js locale needs to be loaded to be used, see [i18n docs](#i18n).
 | **utc** | `boolean` | `false` | When true, input time values will be interpreted as UTC (Zulu time) by Moment.js. Otherwise they will default to the user's local timezone.
 | **displayTimeZone** | `string` | `null` | **Needs [moment's timezone](https://momentjs.com/timezone/) available in your project.** When specified, input time values will be displayed in the given time zone. Otherwise they will default to the user's local timezone (unless `utc` specified).
 | **onChange** | `function` | empty function | Callback trigger when the date changes. The callback receives the selected `moment` object as only parameter, if the date in the input is valid. If the date in the input is not valid, the callback receives the value of the input (a string). |
@@ -72,12 +68,12 @@ render: function() {
 | **disableCloseOnClickOutside** | `boolean` | `false` | When `true`, keep the datepicker open when click event is triggered outside of component. When `false`, close it.
 
 ## i18n
-Different language and date formats are supported by react-datetime. React uses [Moment.js](http://momentjs.com/) to format the dates, and the easiest way of changing the language of the calendar is [changing the Moment.js locale](http://momentjs.com/docs/#/i18n/changing-locale/).
+Different language and date formats are supported by react-datepicker-bem. React uses [Moment.js](http://momentjs.com/) to format the dates, and the easiest way of changing the language of the calendar is [changing the Moment.js locale](http://momentjs.com/docs/#/i18n/changing-locale/).
 
 ```js
 var moment = require('moment');
 require('moment/locale/fr');
-// Now react-datetime will be in french
+// Now react-datepicker-bem will be in french
 ```
 
 If there are multiple locales loaded, you can use the prop `locale` to define what language shall be used by the instance.
@@ -186,34 +182,5 @@ var valid = function( current ){
 ```
 [Working example of disabled weekends here.](http://codepen.io/simeg/pen/jVVKWq)
 
-## Usage with TypeScript
-
-This project includes typings for TypeScript versions 1.8 and 2.0. Additional typings are not
-required.
-
-Typings for 1.8 are found in `react-datetime.d.ts` and typings for 2.0 are found in `typings/index.d.ts`.
-
-```js
-import * as Datetime from 'react-datetime';
-
-class MyDTPicker extends React.Component<MyDTPickerProps, MyDTPickerState> {
-    render() JSX.Element {
-        return <Datetime />;
-    }
-}
-```
-
-## Contributions
-For information about how to contribute, see the [CONTRIBUTING](.github/CONTRIBUTING.md) file.
-
-## Development
-```sh
-npm run dev
-```
-This will start a local `webpack-dev-server` based on `example/example.js` where most development can be done.
-
-If you want to develop using the component inside a React application, we recommend that you use [react-datetime-playground](https://github.com/arqex/react-datetime-playground).
-
-### [Changelog](CHANGELOG.md)
 
 ### [MIT Licensed](LICENSE.md)

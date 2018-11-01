@@ -5,7 +5,7 @@ var assign = require('object-assign'),
 	createClass = require('create-react-class'),
 	moment = require('moment'),
 	React = require('react'),
-	CalendarContainer = require('./src/CalendarContainer'),
+	CalendarContainer = require('./src/main.js'),
 	onClickOutside = require('react-onclickoutside').default
 	;
 
@@ -47,7 +47,7 @@ var Datetime = createClass({
 
 	getInitialState: function() {
 		this.checkTZ( this.props );
-		
+
 		var state = this.getStateFromProps( this.props );
 
 		if ( state.open === undefined )
@@ -321,20 +321,20 @@ var Datetime = createClass({
 			date
 			;
 
-		if (target.className.indexOf('rdtDay') !== -1) {
-			if (target.className.indexOf('rdtNew') !== -1)
+		if (target.className.indexOf('date-picker__day') !== -1) {
+			if (target.className.indexOf('date-picker__next') !== -1)
 				modifier = 1;
-			else if (target.className.indexOf('rdtOld') !== -1)
+			else if (target.className.indexOf('date-picker__last') !== -1)
 				modifier = -1;
 
 			date = viewDate.clone()
 				.month( viewDate.month() + modifier )
 				.date( parseInt( target.getAttribute('data-value'), 10 ) );
-		} else if (target.className.indexOf('rdtMonth') !== -1) {
+		} else if (target.className.indexOf('date-picker__month') !== -1) {
 			date = viewDate.clone()
 				.month( parseInt( target.getAttribute('data-value'), 10 ) )
 				.date( currentDate.date() );
-		} else if (target.className.indexOf('rdtYear') !== -1) {
+		} else if (target.className.indexOf('date-picker__year') !== -1) {
 			date = viewDate.clone()
 				.month( currentDate.month() )
 				.date( currentDate.date() )
@@ -464,7 +464,7 @@ var Datetime = createClass({
 	render: function() {
 		// TODO: Make a function or clean up this code,
 		// logic right now is really hard to follow
-		var className = 'rdt' + (this.props.className ?
+		var className = (this.props.className ?
 									( Array.isArray( this.props.className ) ?
 									' ' + this.props.className.join( ' ' ) : ' ' + this.props.className) : ''),
 			children = [];
@@ -487,15 +487,15 @@ var Datetime = createClass({
 				children = [ React.createElement('input', assign({ key: 'i' }, finalInputProps ))];
 			}
 		} else {
-			className += ' rdtStatic';
+			className += ' date-static';
 		}
 
 		if ( this.props.open || (this.props.open === undefined && this.state.open ) )
-			className += ' rdtOpen';
+			className += ' date-wrapper';
 
 		return React.createElement( ClickableWrapper, {className: className, onClickOut: this.handleClickOutside}, children.concat(
 			React.createElement( 'div',
-				{ key: 'dt', className: 'rdtPicker' },
+				{ key: 'dt', className: 'date-picker' },
 				React.createElement( CalendarContainer, { view: this.state.currentView, viewProps: this.getComponentProps() })
 			)
 		));

@@ -6,11 +6,11 @@ var React = require('react'),
 
 var DateTimePickerMonths = createClass({
 	render: function() {
-		return React.createElement('div', { className: 'rdtMonths' }, [
+		return React.createElement('div', { className: 'date-picker__months' }, [
 			React.createElement('table', { key: 'a' }, React.createElement('thead', {}, React.createElement('tr', {}, [
-				React.createElement('th', { key: 'prev', className: 'rdtPrev', onClick: this.props.subtractTime( 1, 'years' )}, React.createElement('span', {}, '‹' )),
-				React.createElement('th', { key: 'year', className: 'rdtSwitch', onClick: this.props.showView( 'years' ), colSpan: 2, 'data-value': this.props.viewDate.year() }, this.props.viewDate.year() ),
-				React.createElement('th', { key: 'next', className: 'rdtNext', onClick: this.props.addTime( 1, 'years' )}, React.createElement('span', {}, '›' ))
+				React.createElement('th', { key: 'prev', className: 'date-picker__prev', onClick: this.props.subtractTime( 1, 'years' )}, React.createElement('span', {}, '‹' )),
+				React.createElement('th', { key: 'year', className: 'date-picker__switch', onClick: this.props.showView( 'years' ), colSpan: 2, 'data-value': this.props.viewDate.year() }, this.props.viewDate.year() ),
+				React.createElement('th', { key: 'next', className: 'date-picker__next', onClick: this.props.addTime( 1, 'years' )}, React.createElement('span', {}, '›' ))
 			]))),
 			React.createElement('table', { key: 'months' }, React.createElement('tbody', { key: 'b' }, this.renderMonths()))
 		]);
@@ -31,7 +31,7 @@ var DateTimePickerMonths = createClass({
 			;
 
 		while (i < 12) {
-			classes = 'rdtMonth';
+			classes = 'date-picker__month';
 			currentMonth =
 				this.props.viewDate.clone().set({ year: year, month: i, date: irrelevantDate });
 
@@ -48,10 +48,10 @@ var DateTimePickerMonths = createClass({
 			isDisabled = ( validDay === undefined );
 
 			if ( isDisabled )
-				classes += ' rdtDisabled';
+				classes += ' date-picker--disabled';
 
 			if ( date && i === date.month() && year === date.year() )
-				classes += ' rdtActive';
+				classes += ' date-picker--active';
 
 			props = {
 				key: i,

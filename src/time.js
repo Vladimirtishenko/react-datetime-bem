@@ -57,20 +57,20 @@ var DateTimePickerTime = createClass({
 					value = 12;
 				}
 			}
-			return React.createElement('div', { key: type, className: 'rdtCounter' }, [
-				React.createElement('span', { key: 'up', className: 'rdtBtn', onMouseDown: this.onStartClicking( 'increase', type ), onContextMenu: this.disableContextMenu }, '▲' ),
-				React.createElement('div', { key: 'c', className: 'rdtCount' }, value ),
-				React.createElement('span', { key: 'do', className: 'rdtBtn', onMouseDown: this.onStartClicking( 'decrease', type ), onContextMenu: this.disableContextMenu }, '▼' )
+			return React.createElement('div', { key: type, className: 'date-picker__counter' }, [
+				React.createElement('span', { key: 'up', className: 'date-picker__button', onMouseDown: this.onStartClicking( 'increase', type ), onContextMenu: this.disableContextMenu }, '▲' ),
+				React.createElement('div', { key: 'c', className: 'date-picker__count' }, value ),
+				React.createElement('span', { key: 'do', className: 'date-picker__button', onMouseDown: this.onStartClicking( 'decrease', type ), onContextMenu: this.disableContextMenu }, '▼' )
 			]);
 		}
 		return '';
 	},
 
 	renderDayPart: function() {
-		return React.createElement('div', { key: 'dayPart', className: 'rdtCounter' }, [
-			React.createElement('span', { key: 'up', className: 'rdtBtn', onMouseDown: this.onStartClicking( 'toggleDayPart', 'hours'), onContextMenu: this.disableContextMenu }, '▲' ),
-			React.createElement('div', { key: this.state.daypart, className: 'rdtCount' }, this.state.daypart ),
-			React.createElement('span', { key: 'do', className: 'rdtBtn', onMouseDown: this.onStartClicking( 'toggleDayPart', 'hours'), onContextMenu: this.disableContextMenu }, '▼' )
+		return React.createElement('div', { key: 'dayPart', className: 'date-picker__counter' }, [
+			React.createElement('span', { key: 'up', className: 'date-picker__button', onMouseDown: this.onStartClicking( 'toggleDayPart', 'hours'), onContextMenu: this.disableContextMenu }, '▲' ),
+			React.createElement('div', { key: this.state.daypart, className: 'date-picker__count' }, this.state.daypart ),
+			React.createElement('span', { key: 'do', className: 'date-picker__button', onMouseDown: this.onStartClicking( 'toggleDayPart', 'hours'), onContextMenu: this.disableContextMenu }, '▼' )
 		]);
 	},
 
@@ -81,7 +81,7 @@ var DateTimePickerTime = createClass({
 
 		this.state.counters.forEach( function( c ) {
 			if ( counters.length )
-				counters.push( React.createElement('div', { key: 'sep' + counters.length, className: 'rdtCounterSeparator' }, ':' ) );
+				counters.push( React.createElement('div', { key: 'sep' + counters.length, className: 'date-picker__counter-separator' }, ':' ) );
 			counters.push( me.renderCounter( c ) );
 		});
 
@@ -90,19 +90,19 @@ var DateTimePickerTime = createClass({
 		}
 
 		if ( this.state.counters.length === 3 && this.props.timeFormat.indexOf( 'S' ) !== -1 ) {
-			counters.push( React.createElement('div', { className: 'rdtCounterSeparator', key: 'sep5' }, ':' ) );
+			counters.push( React.createElement('div', { className: 'date-picker__counter-separator', key: 'sep5' }, ':' ) );
 			counters.push(
-				React.createElement('div', { className: 'rdtCounter rdtMilli', key: 'm' },
+				React.createElement('div', { className: 'date-picker__counter date-picker__counter--milliseconds', key: 'm' },
 					React.createElement('input', { value: this.state.milliseconds, type: 'text', onChange: this.updateMilli } )
 					)
 				);
 		}
 
-		return React.createElement('div', { className: 'rdtTime' },
+		return React.createElement('div', { className: 'date-picker__time' },
 			React.createElement('table', {}, [
 				this.renderHeader(),
 				React.createElement('tbody', { key: 'b'}, React.createElement('tr', {}, React.createElement('td', {},
-					React.createElement('div', { className: 'rdtCounters' }, counters )
+					React.createElement('div', { className: 'date-picker__counters' }, counters )
 				)))
 			])
 		);
@@ -156,7 +156,7 @@ var DateTimePickerTime = createClass({
 
 		var date = this.props.selectedDate || this.props.viewDate;
 		return React.createElement('thead', { key: 'h' }, React.createElement('tr', {},
-			React.createElement('th', { className: 'rdtSwitch', colSpan: 4, onClick: this.props.showView( 'days' ) }, date.format( this.props.dateFormat ) )
+			React.createElement('th', { className: 'date-picker__switch', colSpan: 4, onClick: this.props.showView( 'days' ) }, date.format( this.props.dateFormat ) )
 		));
 	},
 
